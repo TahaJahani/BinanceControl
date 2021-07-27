@@ -1,6 +1,12 @@
 package DataCollector;
 
 
+import Model.Candle;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,10 +22,10 @@ public class APIClient {
         return instance;
     }
 
-    private String sendGetRequest() {
+    private String sendGetRequest(Candle.Symbol symbol) {
         StringBuilder loadedData = new StringBuilder();
         try {
-            URL address = new URL(BASE_URL + "&from=" + (System.currentTimeMillis() / 1000 - 60); //+ "&symbol=" + symbol.name());
+            URL address = new URL(BASE_URL + "&from=" + (System.currentTimeMillis() / 1000 - 60) + "&symbol=" + symbol.name());
             HttpURLConnection connection = (HttpURLConnection) address.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -37,9 +43,16 @@ public class APIClient {
         return loadedData.toString();
     }
 
+    private Candle getLatestCandle(Candle.Symbol symbol) {
+        String json = sendGetRequest(symbol);
+        //TODO: set SMA
+        JSONArray candleJson = new JSONObject(json).getJSONArray("result");
+        return new Gson().fromJson(candleJson.get(0).toString(), Candle.class);
+    }
+
 
 
     public static void main(String[] args) {
-        getInstance().sendGetRequest();
+        Candle candle = getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
     }
 }
