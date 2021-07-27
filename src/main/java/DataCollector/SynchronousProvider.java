@@ -1,5 +1,6 @@
 package DataCollector;
 
+import Model.Candle;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -9,7 +10,7 @@ import java.util.Properties;
 import java.util.concurrent.Future;
 
 public class SynchronousProvider {
-    private static KafkaProducer<String, String> producer;
+    private static KafkaProducer<String, Candle> producer;
 
 
     private static void initializeProducer() {
@@ -20,17 +21,33 @@ public class SynchronousProvider {
         props.put("retries", 0);
         props.put("linger.ms", 1);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", CandleSerializer.class.getName());
         producer = new KafkaProducer<>(props);
     }
 
-    public static void Send(HashMap<String, String> data) {
+    public static void Send(Candle candle) {
         if (producer == null)
             initializeProducer();
-        for (String key : data.keySet()) {
-            Future<RecordMetadata> metadata = producer.send(new ProducerRecord<String, String>("quickstart-events", key, data.get(key)));
-            System.out.println(metadata.isDone());
+        Future<RecordMetadata> metadata = producer.send(new ProducerRecord<String, Candle>("quickstart-events", "candle", candle));
+        producer.flush();
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                System.out.println("Getting candle");
+                Candle candle = APIClient.getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
+                System.out.println("Candle received");
+                Send(candle);
+                System.out.println("Data Sent");
+                Thread.sleep(10 * 1000);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
         }
-        producer.close();
+    }
+
+    public static void main(String[] args) {
+        new SynchronousProvider().run();
     }
 }

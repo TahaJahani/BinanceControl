@@ -1,6 +1,9 @@
 package Model;
 
-public class Candle {
+import java.io.Serializable;
+import java.util.HashMap;
+
+public class Candle implements Serializable {
 
     public static enum Symbol {
         BTCUSD,

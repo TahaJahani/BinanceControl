@@ -3,7 +3,6 @@ package DataCollector;
 
 import Model.Candle;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,16 +42,10 @@ public class APIClient {
         return loadedData.toString();
     }
 
-    private Candle getLatestCandle(Candle.Symbol symbol) {
+    public Candle getLatestCandle(Candle.Symbol symbol) {
         String json = sendGetRequest(symbol);
         //TODO: set SMA
         JSONArray candleJson = new JSONObject(json).getJSONArray("result");
         return new Gson().fromJson(candleJson.get(0).toString(), Candle.class);
-    }
-
-
-
-    public static void main(String[] args) {
-        Candle candle = getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
     }
 }
