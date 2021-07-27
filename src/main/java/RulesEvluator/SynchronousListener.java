@@ -1,6 +1,5 @@
 package RulesEvluator;
 
-import DataCollector.CandleSerializer;
 import Model.Candle;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -8,29 +7,46 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.Properties;
 
 public class SynchronousListener {
 
+    private static SynchronousListener instance;
+    private KafkaConsumer<String, Candle> consumer;
+    private CandleController controller = new CandleController();
+
     public static void main(String[] args) {
-        initializeConsumer();
+        getInstance().listenForCandles();
     }
 
-    public static void initializeConsumer() {
+    public static SynchronousListener getInstance() {
+        if (instance == null)
+            instance = new SynchronousListener();
+        return instance;
+    }
+
+    public void initializeConsumer() {
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "localhost:9092");
         props.setProperty("group.id", "test");
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-//        props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", CandleDeserializer.class.getName());
-        KafkaConsumer<String, Candle> consumer = new KafkaConsumer<>(props);
+        consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList("quickstart-events"));
+    }
+
+    public void listenForCandles() {
+        if (consumer == null)
+            initializeConsumer();
         while (true) {
             ConsumerRecords<String, Candle> records = consumer.poll(Duration.ofMillis(100));
-            for (ConsumerRecord<String, Candle> record : records)
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value().getOpen());
+            for (ConsumerRecord<String, Candle> record : records) {
+                Candle currentCandle = record.value();
+                controller.addNewCandle(currentCandle);
+            }
         }
     }
 }

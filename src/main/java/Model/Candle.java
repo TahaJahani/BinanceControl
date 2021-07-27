@@ -21,7 +21,10 @@ public class Candle implements Serializable {
     private double close;
     private double volume;
     private double turnover;
-    private double SMA;
+    private double openSMA;
+    private double closeSMA;
+    private double highSMA;
+    private double lowSMA;
 
     public Symbol getSymbol() {
         return symbol;
@@ -59,7 +62,35 @@ public class Candle implements Serializable {
         return turnover;
     }
 
-    public double getSMA() {
-        return SMA;
+    public double getOpenSMA() {
+        return openSMA;
+    }
+
+    public double getCloseSMA() {
+        return closeSMA;
+    }
+
+    public double getHighSMA() {
+        return highSMA;
+    }
+
+    public double getLowSMA() {
+        return lowSMA;
+    }
+
+    public void setOpenSMA(double openSMA) {
+        this.openSMA = openSMA;
+    }
+
+    public void setCloseSMA(double closeSMA) {
+        this.closeSMA = closeSMA;
+    }
+
+    public void setHighSMA(double highSMA) {
+        this.highSMA = highSMA;
+    }
+
+    public void setLowSMA(double lowSMA) {
+        this.lowSMA = lowSMA;
     }
 }

@@ -41,6 +41,7 @@ public class SynchronousProvider {
                 Send(candle);
                 System.out.println("Data Sent");
                 Thread.sleep(10 * 1000);
+                //TODO: use executor service
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
