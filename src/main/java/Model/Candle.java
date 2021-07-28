@@ -12,6 +12,13 @@ public class Candle implements Serializable {
         XRPUSD,
     }
 
+    public static enum Item {
+        OPEN,
+        CLOSE,
+        HIGH,
+        LOW,
+    }
+
     private Symbol symbol;
     private String interval;
     private long open_time;
