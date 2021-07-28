@@ -100,4 +100,13 @@ public class Candle implements Serializable {
     public void setLowSMA(double lowSMA) {
         this.lowSMA = lowSMA;
     }
+
+    public double getItem(Item item) {
+        return switch (item){
+            case LOW -> low;
+            case HIGH -> high;
+            case OPEN -> open;
+            case CLOSE -> close;
+        };
+    }
 }

@@ -3,13 +3,17 @@ package RulesEvluator;
 import Model.Candle;
 import Model.FixedSizeQueue;
 
-import java.util.PriorityQueue;
-
 public class CandleController {
 
+    private static final CandleController instance = new CandleController();
     private int size = 120;
     private FixedSizeQueue<Candle> candlesQueue = new FixedSizeQueue<>(size);
     //TODO: think about different coins...
+
+
+    public static CandleController getInstance() {
+        return instance;
+    }
 
     public CandleController() {
         for (int i = 0; i < size; i++)
@@ -64,5 +68,16 @@ public class CandleController {
             currentCandle.setHighSMA(newHighSMA);
             currentCandle.setLowSMA(newLowSMA);
         }
+    }
+
+    public Candle getCandleBefore(int i) {
+        return candlesQueue.get((size - 1) - i);
+    }
+
+    public double calculateSMA(int interval, Candle.Item item) {
+        double result = 0;
+        for (int i = 0; i < interval; i++)
+            result += candlesQueue.get(size - 1 - i).getItem(item);
+        return result / interval;
     }
 }
