@@ -1,5 +1,3 @@
-package RulesEvluator;
-
 import Model.Candle;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -7,7 +5,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.time.Duration;
 import java.util.Collections;
-import java.util.PriorityQueue;
 import java.util.Properties;
 
 public class SynchronousListener {

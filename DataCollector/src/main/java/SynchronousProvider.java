@@ -1,11 +1,8 @@
-package DataCollector;
-
 import Model.Candle;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
-import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.Future;
 

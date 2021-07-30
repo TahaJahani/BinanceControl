@@ -1,6 +1,3 @@
-package RulesEvluator;
-
-import Model.Candle;
 import Model.Rule;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,7 +29,9 @@ public class RulesEvaluator {
         ArrayList<Rule> rules = readRules();
         for (Rule rule : rules) {
             double SMA = CandleController.getInstance().calculateSMA(rule.getInterval(), rule.getItem());
-            rule.evaluate(SMA);
+            if (rule.evaluate(SMA)) {
+                ;//TODO: insert database row
+            }
         }
     }
 

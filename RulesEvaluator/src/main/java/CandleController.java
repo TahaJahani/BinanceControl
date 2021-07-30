@@ -1,5 +1,3 @@
-package RulesEvluator;
-
 import Model.Candle;
 import Model.FixedSizeQueue;
 
@@ -51,7 +49,7 @@ public class CandleController {
         newCandle.setOpenSMA(openSMA);
         newCandle.setLowSMA(lowSMA);
         candlesQueue.enqueue(newCandle);
-        //TODO: evaluate rules
+        RulesEvaluator.checkRules();
     }
 
     public void updateSMAs() {
@@ -59,19 +57,15 @@ public class CandleController {
         for (int i = 1; i < size; i++) {
             Candle currentCandle = candlesQueue.get(i);
             int oldSize = i + 1;
-            double newCloseSMA = ((currentCandle.getCloseSMA() * i) - dropped.getCloseSMA()) / i;
-            double newOpenSMA = ((currentCandle.getOpenSMA() * i) - dropped.getOpenSMA()) / i;
-            double newHighSMA = ((currentCandle.getHighSMA() * i) - dropped.getHighSMA()) / i;
-            double newLowSMA = ((currentCandle.getLowSMA() * i) - dropped.getLowSMA()) / i;
+            double newCloseSMA = ((currentCandle.getCloseSMA() * oldSize) - dropped.getCloseSMA()) / i;
+            double newOpenSMA = ((currentCandle.getOpenSMA() * oldSize) - dropped.getOpenSMA()) / i;
+            double newHighSMA = ((currentCandle.getHighSMA() * oldSize) - dropped.getHighSMA()) / i;
+            double newLowSMA = ((currentCandle.getLowSMA() * oldSize) - dropped.getLowSMA()) / i;
             currentCandle.setCloseSMA(newCloseSMA);
             currentCandle.setOpenSMA(newOpenSMA);
             currentCandle.setHighSMA(newHighSMA);
             currentCandle.setLowSMA(newLowSMA);
         }
-    }
-
-    public Candle getCandleBefore(int i) {
-        return candlesQueue.get((size - 1) - i);
     }
 
     public double calculateSMA(int interval, Candle.Item item) {

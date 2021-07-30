@@ -1,5 +1,3 @@
-package RulesEvluator;
-
 import Model.Candle;
 import org.apache.kafka.common.serialization.Deserializer;
 

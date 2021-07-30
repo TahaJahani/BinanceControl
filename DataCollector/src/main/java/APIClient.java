@@ -1,6 +1,3 @@
-package DataCollector;
-
-
 import Model.Candle;
 import com.google.gson.Gson;
 import org.json.JSONArray;
