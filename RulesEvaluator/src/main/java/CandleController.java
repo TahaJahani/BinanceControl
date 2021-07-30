@@ -1,5 +1,4 @@
-import Model.Candle;
-import Model.FixedSizeQueue;
+import DataStructures.FixedSizeQueue;
 
 public class CandleController {
 

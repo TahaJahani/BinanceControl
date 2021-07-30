@@ -1,5 +1,3 @@
-package Model;
-
 public class Rule {
 
     public static enum Operator {

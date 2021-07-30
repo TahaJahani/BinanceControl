@@ -1,4 +1,3 @@
-import Model.Candle;
 import org.apache.kafka.common.serialization.Serializer;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

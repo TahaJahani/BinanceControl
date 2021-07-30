@@ -1,4 +1,4 @@
-package Model;
+package DataStructures;
 
 import java.lang.reflect.Array;
 

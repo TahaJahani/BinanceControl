@@ -9,20 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>RulesEvaluator</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>BinanceControl</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>Models</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <artifactId>Models</artifactId>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
