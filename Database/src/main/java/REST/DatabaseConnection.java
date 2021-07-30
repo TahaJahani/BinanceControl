@@ -1,4 +1,5 @@
-import Model.Notification;
+package REST;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -17,7 +18,7 @@ public class DatabaseConnection {
         session.close();
     }
 
-    public static void setUpDatabase() {
+    static void setUpDatabase() {
         if (sessionFactory != null)
             return;
         // A SessionFactory is set up once for an application!

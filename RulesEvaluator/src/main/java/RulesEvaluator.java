@@ -1,4 +1,5 @@
-import Model.Notification;
+import REST.Notification;
+import REST.DatabaseConnection;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

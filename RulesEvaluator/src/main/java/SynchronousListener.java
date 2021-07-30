@@ -1,3 +1,4 @@
+import REST.DatabaseConnection;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -13,9 +14,6 @@ public class SynchronousListener {
     private CandleController controller = CandleController.getInstance();
 
     public static void main(String[] args) {
-        //TODO: remove
-        DatabaseConnection.setUpDatabase();
-
         getInstance().listenForCandles();
     }
 
