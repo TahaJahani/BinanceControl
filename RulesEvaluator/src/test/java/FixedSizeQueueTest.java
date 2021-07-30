@@ -1,4 +1,4 @@
-import Model.FixedSizeQueue;
+import DataStructures.FixedSizeQueue;
 import org.junit.Assert;
 import org.junit.Test;
 

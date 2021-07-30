@@ -1,4 +1,4 @@
-import Model.Candle;
+
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +22,7 @@ public class APIClient {
         StringBuilder loadedData = new StringBuilder();
         try {
             URL address = new URL(BASE_URL + "&from=" + (System.currentTimeMillis() / 1000 - 60) + "&symbol=" + symbol.name());
+            System.out.println("Getting data from " + address);
             HttpURLConnection connection = (HttpURLConnection) address.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");

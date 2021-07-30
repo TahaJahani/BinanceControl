@@ -6,6 +6,7 @@ public class Rule {
         MORE,
     }
 
+    private String name;
     private Candle.Symbol symbol;
     private Candle.Item item;
     private int interval;
@@ -18,6 +19,10 @@ public class Rule {
             case MORE -> SMA > value;
             case EQUAL -> Math.abs(SMA - value) < 0.00001;
         };
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Candle.Symbol getSymbol() {

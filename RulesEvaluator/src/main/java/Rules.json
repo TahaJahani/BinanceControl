@@ -1,0 +1,10 @@
+[
+  {
+    "name": "MyRule",
+    "symbol": "BTCUSD",
+    "item": "HIGH",
+    "interval": "1",
+    "operator": "MORE",
+    "value": "2.0"
+  }
+]

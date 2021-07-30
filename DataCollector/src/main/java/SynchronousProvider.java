@@ -1,4 +1,3 @@
-import Model.Candle;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -32,11 +31,10 @@ public class SynchronousProvider {
     public void run() {
         while (true) {
             try {
-                System.out.println("Getting candle");
                 Candle candle = APIClient.getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
                 System.out.println("Candle received");
                 Send(candle);
-                System.out.println("Data Sent");
+                System.out.println("Candle Data Send: " + candle);
                 Thread.sleep(10 * 1000);
                 //TODO: use executor service
             } catch (InterruptedException e){

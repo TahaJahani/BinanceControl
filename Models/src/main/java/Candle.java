@@ -107,4 +107,15 @@ public class Candle implements Serializable {
             case CLOSE -> close;
         };
     }
+
+    @Override
+    public String toString() {
+        return "Candle{" +
+                "symbol=" + symbol +
+                ", open=" + open +
+                ", high=" + high +
+                ", low=" + low +
+                ", close=" + close +
+                '}';
+    }
 }

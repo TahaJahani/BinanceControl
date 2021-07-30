@@ -1,3 +1,4 @@
+import Model.Notification;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,27 +10,33 @@ import java.util.ArrayList;
 
 public class RulesEvaluator {
 
-    private static final String FILE = "src/main/java/Rules.json";
+    private static final String FILE = "RulesEvaluator/src/main/java/Rules.json";
+    private static ArrayList<Rule> readRules;
 
-    public static ArrayList<Rule> readRules() {
-        ArrayList<Rule> rules = null;
+    public static void readRules() {
         try {
             File rulesFile = openFile();
             BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(rulesFile));
             String rulesJson = new String(inputStream.readAllBytes());
-            rules = new Gson().fromJson(rulesJson, new TypeToken<ArrayList<Rule>>(){}.getType());
+            readRules = new Gson().fromJson(rulesJson, new TypeToken<ArrayList<Rule>>(){}.getType());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return rules;
     }
 
     public static void checkRules() {
-        ArrayList<Rule> rules = readRules();
-        for (Rule rule : rules) {
+        if (readRules == null)
+            readRules();
+        for (Rule rule : readRules) {
+            System.out.println("Checking rule " + rule.getName() + "...");
             double SMA = CandleController.getInstance().calculateSMA(rule.getInterval(), rule.getItem());
             if (rule.evaluate(SMA)) {
-                ;//TODO: insert database row
+                Notification notification = new Notification.Builder()
+                        .ruleName(rule.getName())
+                        .marketName("BiByte")
+                        .price(SMA)
+                        .build();
+                DatabaseConnection.saveNotification(notification);
             }
         }
     }

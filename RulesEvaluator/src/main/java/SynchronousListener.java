@@ -10,9 +10,12 @@ public class SynchronousListener {
 
     private static SynchronousListener instance;
     private KafkaConsumer<String, Candle> consumer;
-    private CandleController controller = new CandleController();
+    private CandleController controller = CandleController.getInstance();
 
     public static void main(String[] args) {
+        //TODO: remove
+        DatabaseConnection.setUpDatabase();
+
         getInstance().listenForCandles();
     }
 

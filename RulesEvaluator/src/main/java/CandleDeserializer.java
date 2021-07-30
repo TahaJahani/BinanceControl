@@ -1,4 +1,3 @@
-import Model.Candle;
 import org.apache.kafka.common.serialization.Deserializer;
 
 import java.io.*;
