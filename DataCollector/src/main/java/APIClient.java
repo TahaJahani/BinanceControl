@@ -42,7 +42,6 @@ public class APIClient {
 
     public Candle getLatestCandle(Candle.Symbol symbol) {
         String json = sendGetRequest(symbol);
-        //TODO: set SMA
         JSONArray candleJson = new JSONObject(json).getJSONArray("result");
         return new Gson().fromJson(candleJson.get(0).toString(), Candle.class);
     }

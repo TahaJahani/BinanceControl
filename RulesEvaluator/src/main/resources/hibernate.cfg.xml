@@ -34,7 +34,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">none</property>
 
-        <mapping class="REST.Notification"/>
+        <mapping class="Model.Notification"/>
 
     </session-factory>
 
