@@ -18,8 +18,6 @@ public class CandleController {
 
     public void addNewCandle(Candle newCandle) {
         candlesQueue.enqueue(newCandle);
-        System.out.println(this);
-        RulesEvaluator.checkRules();
     }
 
     public double calculateSMA(int interval, Candle.Item item) {

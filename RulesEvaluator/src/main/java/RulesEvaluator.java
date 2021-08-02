@@ -47,6 +47,7 @@ public class RulesEvaluator {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                DatabaseHandler.shutdown();
             }
         }
     }

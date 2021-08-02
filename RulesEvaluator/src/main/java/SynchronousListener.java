@@ -24,6 +24,7 @@ public class SynchronousListener {
     }
 
     public void initializeConsumer() {
+        DatabaseHandler.initialize();
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "localhost:9092");
         props.setProperty("group.id", "test");
@@ -37,14 +38,21 @@ public class SynchronousListener {
     public void listenForCandles() {
         if (consumer == null)
             initializeConsumer();
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000 * 60));
-            for (ConsumerRecord<String, String> record : records) {
-                Candle currentCandle = new Gson().fromJson(record.value(), Candle.class);
-                System.out.println("Offset: " + record.offset() + ", value: " +currentCandle);
-                controller.addNewCandle(currentCandle);
-                consumer.commitSync(); //For more consistency
+        try {
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+                for (ConsumerRecord<String, String> record : records) {
+                    Candle currentCandle = new Gson().fromJson(record.value(), Candle.class);
+                    System.out.println("Offset: " + record.offset() + ", value: " + currentCandle);
+                    controller.addNewCandle(currentCandle);
+                    RulesEvaluator.checkRules();
+                    consumer.commitSync(); //For more consistency
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            consumer.close();
         }
     }
 }

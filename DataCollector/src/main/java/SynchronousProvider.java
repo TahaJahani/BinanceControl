@@ -35,10 +35,15 @@ public class SynchronousProvider {
 
     public void run() {
         Runnable task = () -> {
-            Candle candle = APIClient.getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
-            System.out.println("Candle received");
-            Send(candle);
-            System.out.println("Candle Data Sent: " + candle);
+            try {
+                Candle candle = APIClient.getInstance().getLatestCandle(Candle.Symbol.BTCUSD);
+                System.out.println("Candle received");
+                Send(candle);
+                System.out.println("Candle Data Sent: " + candle);
+            }catch (Exception e){
+                e.printStackTrace();
+                producer.close();
+            }
         };
         executorService.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES);
     }

@@ -6,7 +6,12 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class DatabaseHandler {
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory;
+
+    public static void initialize() {
+        if (sessionFactory == null)
+            sessionFactory = buildSessionFactory();
+    }
 
     private static SessionFactory buildSessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
