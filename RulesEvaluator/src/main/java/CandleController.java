@@ -17,7 +17,7 @@ public class CandleController {
     }
 
     public void addNewCandle(Candle newCandle) {
-        System.out.println("Candle Received: " + newCandle);
+//        System.out.println("Candle Received: " + newCandle);
         candlesQueue.enqueue(newCandle);
         System.out.println(this);
         RulesEvaluator.checkRules();
@@ -27,9 +27,13 @@ public class CandleController {
         double result = 0;
         System.out.println(candlesQueue);
         for (int i = 0; i < interval; i++) {
-            System.out.println("Log: " + i + ". " + candlesQueue.get(size - 1 - i));
+//            System.out.println("Log: " + i + ". " + candlesQueue.get(size - 1 - i));
             result += candlesQueue.get(size - 1 - i).getItem(item);
         }
         return result / interval;
+    }
+
+    public Candle getLastCandle() {
+        return candlesQueue.get(size - 1);
     }
 }

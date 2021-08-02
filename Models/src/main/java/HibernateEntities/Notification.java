@@ -1,4 +1,4 @@
-package REST;
+package HibernateEntities;
 
 import org.hibernate.annotations.GenericGenerator;
 

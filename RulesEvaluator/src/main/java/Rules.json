@@ -3,8 +3,8 @@
     "name": "MyRule",
     "symbol": "BTCUSD",
     "item": "HIGH",
-    "interval": "1",
+    "interval": "2",
     "operator": "MORE",
-    "value": "41697.0"
+    "value": "41750.0"
   }
 ]

@@ -1,4 +1,4 @@
-import Model.Notification;
+import HibernateEntities.Notification;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,12 +31,13 @@ public class RulesEvaluator {
         for (Rule rule : readRules) {
             System.out.println("Checking rule " + rule.getName() + "...");
             double SMA = CandleController.getInstance().calculateSMA(rule.getInterval(), rule.getItem());
+            double price = CandleController.getInstance().getLastCandle().getItem(rule.getItem());
             try {
                 if (rule.evaluate(SMA)) {
                     Notification notification = new Notification.Builder()
                             .ruleName(rule.getName())
                             .marketName("BiByte")
-                            .price(SMA)
+                            .price(price)
                             .build();
                     DatabaseHandler.saveNotification(notification);
                 }
