@@ -9,10 +9,6 @@ import java.util.Calendar;
 @Table(name = "notifications")
 public class Notification {
 
-    protected Notification() {
-
-    }
-
     private int id;
     private String ruleName;
     private String marketName;

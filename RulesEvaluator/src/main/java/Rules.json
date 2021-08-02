@@ -6,5 +6,13 @@
     "interval": "2",
     "operator": "MORE",
     "value": "41750.0"
+  },
+  {
+    "name": "Taha Rule",
+    "symbol": "BTCUSD",
+    "item": "OPEN",
+    "interval": "5",
+    "operator": "LESS",
+    "value": "40100.0"
   }
 ]

@@ -10,7 +10,7 @@ public class DatabaseHandler {
 
     private static SessionFactory buildSessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
+                .configure()
                 .build();
         try {
             return new MetadataSources(registry).buildMetadata().buildSessionFactory();
