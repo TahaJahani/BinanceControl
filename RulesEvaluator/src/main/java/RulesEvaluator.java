@@ -38,13 +38,15 @@ public class RulesEvaluator {
             double price = CandleController.getInstance().getLastCandle().getItem(rule.getItem());
             try {
                 if (rule.evaluate(SMA)) {
+                    System.out.println("Rule holds, inserting new notification into database...");
                     Notification notification = new Notification.Builder()
                             .ruleName(rule.getName())
                             .marketName("BiByte")
                             .price(price)
                             .build();
                     DatabaseHandler.saveNotification(notification);
-                }
+                }else
+                    System.out.println("Rule does not hold");
             } catch (Exception e) {
                 e.printStackTrace();
                 DatabaseHandler.shutdown();

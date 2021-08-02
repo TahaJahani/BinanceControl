@@ -13,25 +13,17 @@
 
     <session-factory>
 
-        <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/Sahab</property>
         <property name="connection.username">taha</property>
         <property name="connection.password">1234</property>
 
-        <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
 
-        <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
-        <!-- Disable the second-level cache  -->
-<!--        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>-->
+        <property name="show_sql">false</property>
 
-        <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
-
-        <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">none</property>
 
         <mapping class="HibernateEntities.Notification"/>
