@@ -13,6 +13,10 @@ public class RulesEvaluator {
     private static final String FILE = "RulesEvaluator/src/main/java/Rules.json";
     private static ArrayList<Rule> readRules;
 
+    public static ArrayList<Rule> getReadRules() {
+        return readRules;
+    }
+
     public static void readRules() {
         try {
             File rulesFile = openFile();

@@ -44,4 +44,28 @@ public class Rule {
     public double getValue() {
         return value;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSymbol(Candle.Symbol symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setItem(Candle.Item item) {
+        this.item = item;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
 }
