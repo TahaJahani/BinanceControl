@@ -3,7 +3,7 @@ import DataStructures.FixedSizeQueue;
 public class CandleController {
 
     private static final CandleController instance = new CandleController();
-    private int size = 5;
+    private int size = 120;
     private FixedSizeQueue<Candle> candlesQueue = new FixedSizeQueue<>(size);
     //TODO: think about different coins...
 

@@ -21,9 +21,9 @@ such as `calculateSMA` that calculates SMA for a given Item and Length.
 - RulesEvaluator: A class that read rules from a file and evaluates them whenever a new candle is inserted.
 - DatabaseHelper: Connects to database and inserts new records for notifications, if needed.
 
-##Models Module
+## Models Module
 This module hold three classes which are just simple model data used all over the application.
 
-##Database Module
+## Database Module
 This module serves as a server which provides API for users to see recent notification through the route `/notifications/all`.
 This module uses Spring and Hibernate frameworks to connect to database and routing.
